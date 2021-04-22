@@ -25,8 +25,8 @@ class AuthActivity : AppCompatActivity() {
 
     private fun init() {
         providers = arrayListOf(
-            EmailBuilder().build(),
-            GoogleBuilder().build()
+                EmailBuilder().build(),
+                GoogleBuilder().build()
         )
     }
 
@@ -35,11 +35,11 @@ class AuthActivity : AppCompatActivity() {
 
         // Create and launch sign-in intent
         startActivityForResult(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build(),
-            RC_SIGN_IN
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                RC_SIGN_IN
         )
         // [END auth_fui_create_intent]
     }
@@ -56,6 +56,7 @@ class AuthActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 if(user != null) {
                     Toast.makeText(this@AuthActivity, "Bem vindo, ${user.displayName}", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@AuthActivity, MainActivity::class.java))
                 }
                 // ...
             } else {
@@ -92,13 +93,13 @@ class AuthActivity : AppCompatActivity() {
     private fun themeAndLogo() {
         // [START auth_fui_theme_logo]
         startActivityForResult(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .setLogo(R.drawable.common_google_signin_btn_icon_light) // Set logo drawable
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .setLogo(R.drawable.common_google_signin_btn_icon_light) // Set logo drawable
 //                .setTheme(R.style.ThemeOverlay_AppCompat_Dark) // Set theme
-                .build(),
-            RC_SIGN_IN
+                        .build(),
+                RC_SIGN_IN
         )
         // [END auth_fui_theme_logo]
     }
