@@ -19,6 +19,9 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+        //TODO remover chamada da main activity
+        return startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+
         init()
         themeAndLogo()
     }
