@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Aglomeranão</string>
     <string name="create_occurrence">Criar</string>
+    <string name="welcome">Bem vindo(a), </string>
+    <string name="welcome_back">Bem vindo(a) de volta, </string>
+    <string name="location_permission_needed">É necessário dar permissão de acesso à localização do dispositivo</string>
 </resources>

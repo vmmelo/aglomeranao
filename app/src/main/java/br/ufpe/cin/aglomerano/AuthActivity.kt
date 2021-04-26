@@ -3,6 +3,7 @@ package br.ufpe.cin.aglomerano
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
@@ -19,9 +20,15 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        //TODO remover chamada da main activity
-        return startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user != null) {
+            val welcomeMessage = StringBuilder()
+            welcomeMessage.append(resources.getString(R.string.welcome_back))
+                .append(user.displayName)
+            Toast.makeText(this@AuthActivity, welcomeMessage.toString(), Toast.LENGTH_SHORT).show()
 
+            return startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+        }
         init()
         themeAndLogo()
     }
@@ -58,7 +65,10 @@ class AuthActivity : AppCompatActivity() {
                 // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
                 if(user != null) {
-                    Toast.makeText(this@AuthActivity, "Bem vindo, ${user.displayName}", Toast.LENGTH_SHORT).show()
+                    val welcomeMessage = StringBuilder()
+                    welcomeMessage.append(resources.getString(R.string.welcome))
+                        .append(user.displayName)
+                    Toast.makeText(this@AuthActivity, welcomeMessage.toString(), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@AuthActivity, MainActivity::class.java))
                 }
                 // ...

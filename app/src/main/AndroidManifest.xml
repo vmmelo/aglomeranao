@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Aglomeranão">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD3pRRaFBFjXdCA6kX_RMBYTaYT45pba2w" />
+
         <activity android:name=".CreateOccurrenceActivity"></activity>
         <activity android:name=".AuthActivity">
             <intent-filter>
