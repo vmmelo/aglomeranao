@@ -21,6 +21,7 @@ class CreateOccurrenceActivity : AppCompatActivity() {
         binding = ActivityCreateOccurrenceBinding.inflate(layoutInflater)
 //        setContentView(binding.root)
         getLocationPermission()
+
 //        binding.createOccurrence.setOnClickListener {
 //        }
     }
@@ -53,7 +54,8 @@ class CreateOccurrenceActivity : AppCompatActivity() {
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermissionGranted = true
                 } else {
-                    Toast.makeText(this@CreateOccurrenceActivity, resources.getString(R.string.location_permission_needed), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CreateOccurrenceActivity, resources.getString(R.string.location_permission_needed), Toast.LENGTH_LONG).show()
+                    Thread.sleep(2000)
                     finish()
                 }
             }
