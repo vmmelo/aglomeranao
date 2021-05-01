@@ -4,4 +4,9 @@
     <string name="welcome">Bem vindo(a), </string>
     <string name="welcome_back">Bem vindo(a) de volta, </string>
     <string name="location_permission_needed">É necessário dar permissão de acesso à localização do dispositivo</string>
+    <string name="title_activity_maps">Selecione um lugar</string>
+    <string name="default_info_title">Localização padrão</string>
+    <string name="default_info_snippet">Nenhum local encontrado, porque a permissão de acesso à localização está desabilitada.</string>
+    <string name="option_get_place">Buscar local</string>
+    <string name="pick_place">Escolha um local</string>
 </resources>

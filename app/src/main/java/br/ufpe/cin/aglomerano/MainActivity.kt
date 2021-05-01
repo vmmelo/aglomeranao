@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.createOccurrence.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CreateOccurrenceActivity::class.java))
+            startActivity(Intent(this@MainActivity, MapsActivity::class.java))
         }
     }
 }
