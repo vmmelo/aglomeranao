@@ -1,68 +1,63 @@
 package br.ufpe.cin.aglomerano
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import br.ufpe.cin.aglomerano.databinding.ActivityCreateOccurrenceBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class CreateOccurrenceActivity : AppCompatActivity() {
+
+    companion object {
+        private val TAG = "CreateOccurrence"
+    }
 
     private var locationPermissionGranted = false
 
     private lateinit var binding : ActivityCreateOccurrenceBinding
+    private lateinit var database : FirebaseFirestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val user = FirebaseAuth.getInstance().currentUser
+
         binding = ActivityCreateOccurrenceBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-        getLocationPermission()
+        setContentView(binding.root)
 
-//        binding.createOccurrence.setOnClickListener {
-//        }
-    }
+        database = Firebase.firestore
+        binding.saveOccurence.setOnClickListener {
 
-    private fun getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(this.applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+            if(user != null) {
+                writeNewOccurrence(
+                    user.uid,
+                    user.email,
+                    binding.occurrenceTime.text.toString(),
+                    binding.occurrenceDate.text.toString(),
+                    binding.occurrenceDescription.text.toString()
+                )
+            }
+
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
-                                            grantResults: IntArray) {
-        locationPermissionGranted = false
-        when (requestCode) {
-            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermissionGranted = true
-                } else {
-                    Toast.makeText(this@CreateOccurrenceActivity, resources.getString(R.string.location_permission_needed), Toast.LENGTH_LONG).show()
-                    Thread.sleep(2000)
+    private fun writeNewOccurrence(userId: String, email: String?, time: String, date: String, description: String) {
+        val occurrence = Occurrence(userId, email, time, date, description)
+        Log.d(TAG, occurrence.toString())
+        database.collection("occurences")
+                .add(occurrence)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "occurrence added with ID: ${documentReference.id}")
+                    Toast.makeText(this@CreateOccurrenceActivity, resources.getString(R.string.occurrence_saved), Toast.LENGTH_LONG).show()
                     finish()
                 }
-            }
-        }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding occurrence", e)
+                }
     }
 
-    companion object {
-        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-    }
 }

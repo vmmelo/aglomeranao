@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="occurrence_time_hint">Horário da ocorrência</string>
+    <string name="ocurrence_description_hint">Descrição da ocorrência (dê o máximo de detalhes possível)</string>
+    <string name="occurrence_date_hint">Data da ocorrência</string>
+    <string name="save">Salvar</string>
+</resources>

@@ -9,4 +9,9 @@
     <string name="default_info_snippet">Nenhum local encontrado, porque a permissão de acesso à localização está desabilitada.</string>
     <string name="option_get_place">Buscar local</string>
     <string name="pick_place">Escolha um local</string>
+    <string name="occurrence_time_hint">Horário da ocorrência</string>
+    <string name="ocurrence_description_hint">Descrição da ocorrência (dê o máximo de detalhes possível)</string>
+    <string name="occurrence_date_hint">Data da ocorrência</string>
+    <string name="save">Salvar</string>
+    <string name="occurrence_saved">Ocorrência salva com sucesso</string>
 </resources>
