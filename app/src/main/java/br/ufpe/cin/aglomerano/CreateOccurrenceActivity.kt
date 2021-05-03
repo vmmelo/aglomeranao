@@ -48,7 +48,7 @@ class CreateOccurrenceActivity : AppCompatActivity() {
     private fun writeNewOccurrence(userId: String, email: String?, time: String, date: String, description: String) {
         val occurrence = Occurrence(userId, email, time, date, description)
         Log.d(TAG, occurrence.toString())
-        database.collection("occurences")
+        database.collection("occurrences")
                 .add(occurrence)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "occurrence added with ID: ${documentReference.id}")

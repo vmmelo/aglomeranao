@@ -4,4 +4,6 @@
     <string name="ocurrence_description_hint">Descrição da ocorrência (dê o máximo de detalhes possível)</string>
     <string name="occurrence_date_hint">Data da ocorrência</string>
     <string name="save">Salvar</string>
+    <string name="date">Date</string>
+    <string name="icon">Icon</string>
 </resources>
