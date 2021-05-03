@@ -40,8 +40,19 @@ class MainActivity : AppCompatActivity() {
         getOccurrences()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getOccurrences()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getOccurrences()
+    }
+
     private fun getOccurrences() {
         val recyclerViewOccurrences = binding.occurrencesList
+        occurrencesList = mutableListOf()
         database.collection("occurrences")
                 .get()
                 .addOnSuccessListener { documents ->
@@ -58,16 +69,15 @@ class MainActivity : AppCompatActivity() {
                                 )
                         )
                     }
+                    recyclerViewOccurrences.apply {
+                        layoutManager = LinearLayoutManager(this@MainActivity)
+                        addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+                        adapter = OccurrenceAdapter(occurrencesList,layoutInflater)
+                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents: ", exception)
                 }
-
-        recyclerViewOccurrences.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
-            adapter = OccurrenceAdapter(occurrencesList,layoutInflater)
-        }
 
     }
 }

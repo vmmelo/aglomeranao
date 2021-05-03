@@ -36,7 +36,7 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
         binding.email.text = "Email: " + occurrence.email
         binding.time.text= "Hora:" + occurrence.time
         binding.date.text= "Data:" + occurrence.date
-        binding.description.text= "Descrição: " + occurrence.description
+        binding.description.text= "Descrição: " + (occurrence.description?.take(20) ?: "") + "..."
 
     }
 }
