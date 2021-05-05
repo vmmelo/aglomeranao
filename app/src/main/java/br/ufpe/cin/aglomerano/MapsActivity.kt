@@ -3,6 +3,7 @@ package br.ufpe.cin.aglomerano
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
@@ -44,9 +44,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-    // A default location (Sydney, Australia) and default zoom to use when location permission is
+    // A default location (CIn UFPE) and default zoom to use when location permission is
     // not granted.
-    private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    private val defaultLocation = LatLng(-8.0554591,-34.95133)
     private var locationPermissionGranted = false
 
     // The geographical location where the device is currently located. That is, the last-known
@@ -329,6 +329,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Ask the user to choose the place where they are now.
         val listener = DialogInterface.OnClickListener { dialog, which -> // The "which" argument contains the position of the selected item.
             val markerLatLng = likelyPlaceLatLngs[which]
+
+            //go to create occurrence activity
+            if (markerLatLng != null) {
+                goToCreateOccurrenceActivity(markerLatLng.latitude, markerLatLng.longitude, likelyPlaceNames[which])
+            }
+
             var markerSnippet = likelyPlaceAddresses[which]
             if (likelyPlaceAttributions[which] != null) {
                 markerSnippet = """
@@ -394,5 +400,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Used for selecting the current place.
         private const val M_MAX_ENTRIES = 5
+    }
+
+    private fun goToCreateOccurrenceActivity(latitude: Double, longitude: Double, name: String?){
+        //Intent Explicit
+        val intentExplicit = Intent(this, CreateOccurrenceActivity::class.java)
+        intentExplicit.putExtra("latitude", latitude)
+        intentExplicit.putExtra("longitude", longitude)
+        intentExplicit.putExtra("name", name)
+
+        startActivity(intentExplicit)
     }
 }

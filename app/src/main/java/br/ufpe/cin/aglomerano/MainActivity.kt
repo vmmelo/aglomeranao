@@ -31,11 +31,11 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
 
         if(user != null) {
-            binding.userName.text = user.displayName
+            binding.userName.text = if (user.displayName !== null && user.displayName !== "") user.displayName else user.email
         }
 
         binding.createOccurrence.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CreateOccurrenceActivity::class.java))
+            startActivity(Intent(this@MainActivity, MapsActivity::class.java))
         }
         getOccurrences()
     }
@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        getOccurrences()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
         getOccurrences()
     }
 

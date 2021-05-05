@@ -17,7 +17,7 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
         binding.root.setOnClickListener {
             val c = binding.date.context
 
-            //Intent Explicito
+            //Intent Explicit
             val intentExplicit = Intent(c, OccurrenceActivity::class.java)
             intentExplicit.putExtra("nome", email)
             intentExplicit.putExtra("login", time)
