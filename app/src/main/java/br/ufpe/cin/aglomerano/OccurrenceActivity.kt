@@ -27,8 +27,8 @@ class OccurrenceActivity : AppCompatActivity() {
 
         binding.detailsDateTime.text = getString(R.string.date_time, date, time)
         binding.detailsDescription.text = description
-        binding.detailsEmail.text = email
-        binding.detailsPlaceName.text = placeName
+        binding.detailsEmail.text = "email: " + email
+        binding.detailsPlaceName.text = "local: " + placeName
 
         binding.detailsBtnMap.setOnClickListener {
             val i = Intent(ACTION_VIEW)

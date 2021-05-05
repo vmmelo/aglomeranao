@@ -22,7 +22,7 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
 
             //Intent Explicit
             val intentExplicit = Intent(c, OccurrenceActivity::class.java)
-            intentExplicit.putExtra("nome", email)
+            intentExplicit.putExtra("email", email)
             intentExplicit.putExtra("login", time)
             intentExplicit.putExtra("date", date)
             intentExplicit.putExtra("time", time)
