@@ -6,4 +6,5 @@
     <string name="save">Salvar</string>
     <string name="date">Date</string>
     <string name="icon">Icon</string>
+    <string name="place_name">Place name</string>
 </resources>

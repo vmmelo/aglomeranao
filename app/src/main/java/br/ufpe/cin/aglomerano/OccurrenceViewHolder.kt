@@ -12,10 +12,13 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
     var time : String = "00:00"
     var date : String = "01/01/2021"
     var description : String = "Lorem Ipsum"
+    var placeName : String = "Lorem Ipsum"
+    var latitude : Double = 0.0
+    var longitude : Double = 0.0
 
     init {
         binding.root.setOnClickListener {
-            val c = binding.date.context
+            val c = binding.description.context
 
             //Intent Explicit
             val intentExplicit = Intent(c, OccurrenceActivity::class.java)
@@ -23,6 +26,9 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
             intentExplicit.putExtra("login", time)
             intentExplicit.putExtra("date", date)
             intentExplicit.putExtra("description", description)
+            intentExplicit.putExtra("placeName", placeName)
+            intentExplicit.putExtra("latitude", latitude)
+            intentExplicit.putExtra("longitude", longitude)
 
             c.startActivity(intentExplicit)
         }
@@ -33,9 +39,8 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
         date = occurrence.date.toString()
         description = occurrence.description.toString()
 
-        binding.email.text = "Email: " + occurrence.email
-        binding.time.text= "Hora:" + occurrence.time
-        binding.date.text= "Data:" + occurrence.date
+        binding.placeName.text = "Local: " + occurrence.placeName
+        binding.dateTime.text= "Data/Hora:" + occurrence.date + occurrence.time
         binding.description.text= "Descrição: " + (occurrence.description?.take(20) ?: "") + "..."
 
     }

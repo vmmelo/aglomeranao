@@ -64,6 +64,15 @@ class MainActivity : AppCompatActivity() {
                     for (document in documents) {
                         val data = document.data
                         Log.d(TAG, "${document.id} => ${document.data}")
+                        if(data["latitude"] === null){
+                            data["latitude"] = 0.0
+                        }
+                        if(data["longitude"] === null){
+                            data["longitude"] = 0.0
+                        }
+                        if(data["placeName"] === null){
+                            data["placeName"] = ""
+                        }
                         occurrencesList.add(
                                 Occurrence(
                                         data["userId"] as String,
@@ -71,7 +80,10 @@ class MainActivity : AppCompatActivity() {
                                         data["time"] as String,
                                         data["date"] as String,
                                         data["description"] as String,
-                                )
+                                        data["latitude"] as Double,
+                                        data["longitude"] as Double,
+                                        data["placeName"] as String,
+                                        )
                         )
                     }
                     recyclerViewOccurrences.apply {

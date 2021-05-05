@@ -18,6 +18,9 @@ class OccurrenceActivity : AppCompatActivity() {
         val time = intent.getStringExtra("time")
         val date = intent.getStringExtra("date")
         val description = intent.getStringExtra("description")
+        val placeName = intent.getStringExtra("placeName")
+        val latitude = intent.getDoubleExtra("latitude", 0.0)
+        val longitude = intent.getDoubleExtra("longitude", 0.0)
 
         binding.detailsDate.text = date
         binding.detailsTime.text = time
