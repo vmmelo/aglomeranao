@@ -12,7 +12,7 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
     var time : String = "00:00"
     var date : String = "01/01/2021"
     var description : String = "Lorem Ipsum"
-    var placeName : String = "Lorem Ipsum"
+    var placeName : String = "Place Name"
     var latitude : Double = 0.0
     var longitude : Double = 0.0
 
@@ -25,6 +25,7 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
             intentExplicit.putExtra("nome", email)
             intentExplicit.putExtra("login", time)
             intentExplicit.putExtra("date", date)
+            intentExplicit.putExtra("time", time)
             intentExplicit.putExtra("description", description)
             intentExplicit.putExtra("placeName", placeName)
             intentExplicit.putExtra("latitude", latitude)
@@ -38,6 +39,9 @@ class OccurrenceViewHolder(private val binding: LineBinding) :
         time = occurrence.time
         date = occurrence.date.toString()
         description = occurrence.description.toString()
+        placeName = occurrence.placeName.toString()
+        latitude = occurrence.latitude ?: 0.0
+        longitude = occurrence.longitude ?: 0.0
 
         binding.placeName.text = "Local: " + occurrence.placeName
         binding.dateTime.text= "Data/Hora:" + occurrence.date + occurrence.time

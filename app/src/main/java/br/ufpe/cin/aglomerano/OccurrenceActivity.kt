@@ -1,5 +1,8 @@
 package br.ufpe.cin.aglomerano
 
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -22,9 +25,15 @@ class OccurrenceActivity : AppCompatActivity() {
         val latitude = intent.getDoubleExtra("latitude", 0.0)
         val longitude = intent.getDoubleExtra("longitude", 0.0)
 
-        binding.detailsDate.text = date
-        binding.detailsTime.text = time
+        binding.detailsDateTime.text = getString(R.string.date_time, date, time)
         binding.detailsDescription.text = description
         binding.detailsEmail.text = email
+        binding.detailsPlaceName.text = placeName
+
+        binding.detailsBtnMap.setOnClickListener {
+            val i = Intent(ACTION_VIEW)
+            i.data = Uri.parse("geo:$latitude,$longitude")
+            startActivity(i)
+        }
     }
 }
